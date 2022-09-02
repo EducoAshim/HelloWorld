@@ -19,11 +19,7 @@ pipeline {
                sh 'dotnet build HelloWorld.sln --configuration Release --no-restore'
             }
          }
-         stage('Run'){
-           steps{
-               sh 'dotnet run HelloWorld.sln --configuration Release --no-restore'
-            }
-         }
+         
          
     }
 }
