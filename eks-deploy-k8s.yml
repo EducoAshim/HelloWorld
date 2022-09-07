@@ -1,0 +1,42 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: HelloWorld
+  name: helloWorld
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: helloWorld
+  template:
+    metadata:
+      labels:
+        app: helloWorld
+    spec:
+      containers:
+      - name: my-helloWorld-app
+        image: 822122654345.dkr.ecr.us-west-2.amazonaws.com/jenkin-pipeline-build-demo:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8085
+          name: http
+          protocol: TCP
+# service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: helloWorld
+    k8s-app: helloWorld
+  name: helloWorld
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8085
+  type: LoadBalancer
+  selector:
+    app: helloWorld

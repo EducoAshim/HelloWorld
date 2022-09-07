@@ -19,6 +19,7 @@ pipeline {
                sh 'dotnet build HelloWorld.sln --configuration Release --no-restore'
             }
          }
+        
          
          
     }
